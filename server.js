@@ -20,7 +20,6 @@ app.post('/detect', async (req, res, next) => {
   try {
     const { images } = req.body;
     images.shift();
-    console.log(images);
     if (!images) {
       throw new Error('Bad Request');
     }
@@ -36,12 +35,12 @@ app.post('/detect', async (req, res, next) => {
       const jpegBuffer = await sharp(pic.data).jpeg().toBuffer();
       const image = tf.node.decodeImage(jpegBuffer, 3);
       const predictions = await model.classify(image);
-      const importantClasses = ['Hentai', 'Porn', 'Sexy'];
+      const importantClasses = { Hentai: 10, Porn: 2, Sexy: 80 };
       for (let j = 0; j < predictions.length; j++) {
         const prediction = predictions[j];
         if (
-          importantClasses.includes(prediction.className) &&
-          prediction.probability * 100 >= 30
+          importantClasses.hasOwnProperty(prediction.className) &&
+          prediction.probability * 100 >= importantClasses[prediction.className]
         ) {
           result.push(images[i]);
         }
