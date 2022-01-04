@@ -36,7 +36,7 @@ app.post('/detect', async (req, res, next) => {
       const jpegBuffer = await sharp(pic.data).jpeg().toBuffer();
       const image = tf.node.decodeImage(jpegBuffer, 3);
       const predictions = await model.classify(image);
-      const importantClasses = { Hentai: 10, Porn: 2, Sexy: 80 };
+      const importantClasses = { Hentai: 90, Porn: 2, Sexy: 90 };
       for (let j = 0; j < predictions.length; j++) {
         const prediction = predictions[j];
         if (
