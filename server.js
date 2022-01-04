@@ -6,6 +6,7 @@ const tf = require('@tensorflow/tfjs-node');
 const nsfw = require('nsfwjs');
 const sharp = require('sharp');
 let model = null;
+tf.enableProdMode()
 
 const app = express();
 app.use(
