@@ -16,7 +16,7 @@ $ npm install
 3. Run the server.
 
 ```
-$ npm start
+$ node server.js
 ```
 
-4. Go to localhost:3000.
+4. Go to localhost:4000.
